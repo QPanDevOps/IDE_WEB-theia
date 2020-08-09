@@ -205,7 +205,7 @@ export class TaskService implements TaskConfigurationClient {
             });
             const taskConfig = event.config;
             const taskIdentifier = taskConfig ? this.getTaskIdentifier(taskConfig) : event.taskId.toString();
-            this.messageService.info(`Task '${taskIdentifier}' has been started.`);
+            console.log(`Task '${taskIdentifier}' has been started.`);
         });
 
         this.taskWatcher.onOutputProcessed(async (event: TaskOutputProcessedEvent) => {
@@ -302,7 +302,7 @@ export class TaskService implements TaskConfigurationClient {
             if (event.code !== undefined) {
                 const message = `Task '${taskIdentifier}' has exited with code ${event.code}.`;
                 if (event.code === 0) {
-                    this.messageService.info(message);
+                    console.log(message);
                 } else {
                     const eventTaskConfig = event.config;
                     if (eventTaskConfig && eventTaskConfig.presentation && eventTaskConfig.presentation.reveal === RevealKind.Silent && event.terminalId) {
